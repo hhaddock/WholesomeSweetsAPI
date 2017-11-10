@@ -1,11 +1,11 @@
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS order_complete;
 DROP TABLE IF EXISTS user_alias;
-DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS product_price;
 DROP TABLE IF EXISTS product_picture;
 DROP TABLE IF EXISTS product_stock;
-DROP TABLE IF EXISTS order;
-DROP TABLE IF EXISTS order_complete;
+DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS user;
 
 CREATE TABLE user (
   email VARCHAR(128) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE product_stock(
   PRIMARY KEY(fk_product)
 );
 CREATE TABLE `order`(
-  order_num INT NOT NULL,
+  order_num INT(11) NOT NULL AUTO_INCREMENT,
   fk_product VARCHAR(128) NOT NULL,
   fk_email VARCHAR(128) NOT NULL,
   quantity INT(11),
@@ -52,7 +52,7 @@ CREATE TABLE `order`(
   PRIMARY KEY (order_num)
 );
 CREATE TABLE order_complete(
-  fk_order_num VARCHAR(128) NOT NULL,
+  fk_order_num INT(11) NOT NULL,
   status VARCHAR(128) NOT NULL,
   FOREIGN KEY(fk_order_num) REFERENCES `order` (order_num),
   PRIMARY KEY (fk_order_num)
