@@ -1,0 +1,24 @@
+{
+  "name": "wholesomesweetsapi",
+  "version": "1.0.0",
+  "description": "API For Wholesome Sweets Bakery",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hhaddock/WholesomeSweetsAPI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hhaddock/WholesomeSweetsAPI/issues"
+  },
+  "homepage": "https://github.com/hhaddock/WholesomeSweetsAPI#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}
