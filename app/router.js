@@ -14,7 +14,6 @@ router.get('/users', function(req,res){
 router.post('/login', function(req, res){
   var user = req.body.user;
   var pass = req.body.pass;
-  res.send('POST request to login receieved with ' + user + ' with ' + pass);
   console.log("login attempt");
 });
 
