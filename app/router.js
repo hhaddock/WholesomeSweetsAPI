@@ -11,5 +11,12 @@ router.get('/users', function(req,res){
   console.log("Test Route");
 });
 
+router.post('/login', function(req, res){
+  var user = req.body.user;
+  var pass = req.body.pass;
+  res.send('POST request to login receieved with ' + user + ' with ' + pass);
+  console.log("login attempt");
+});
+
 //Returns the router as a useable variable
 module.exports = router;
