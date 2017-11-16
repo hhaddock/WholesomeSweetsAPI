@@ -3,8 +3,7 @@ var bcrypt = require('bcrypt');
 var router = express.Router();
 var db = require('./connection');
 
-//This is an example route
-//We do not need to include this in prod
+
 router.post('/signup', function(req,res){
   let alias = req.body.alias;
   let email = req.body.email;
