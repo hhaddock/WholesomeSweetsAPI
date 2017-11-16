@@ -15,9 +15,10 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 
-//Tell the express server to look at the router
-//for /api and reference it through the router.js file
-app.use('/api', require('./app/router.js'));
+//Tell the express server which router file to look at
+app.use('/user', require('./app/user.js'));
+app.use('/product', require('./app/product.js'));
+app.use('/order', require('./app/order.js'));
 
 //Tell the express server to listen for traffic on the above port
 app.listen(port);
