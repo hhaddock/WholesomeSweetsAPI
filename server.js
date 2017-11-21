@@ -5,6 +5,8 @@ var port = 3000;
 
 //NPM Modules
 var express = require('express');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 
 //Creating an instance of of the Express server
@@ -14,6 +16,8 @@ var app = express();
 //This is basic setup stuff for the server
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session({secret: "testKey"}));
 
 //Tell the express server which router file to look at
 app.use('/user', require('./app/user.js'));

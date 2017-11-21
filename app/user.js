@@ -44,7 +44,12 @@ router.post('/login', function(req, res){
       // compare plaintext password against hashed password
       bcrypt.compare(pass, hash, function(err, result) {
         // sends true if the same false if not
-        res.send(result);
+        if(result){
+         req.session.user = email;
+         res.send(result);
+        } else {
+         res.send(err);
+        }
       });
     }
     // user doesn't exist or something else went wrong
@@ -53,6 +58,19 @@ router.post('/login', function(req, res){
     }
   });
 }); // end login
+
+
+
+
+function checkSignIn(req, res){
+   if(req.session.user){
+      next();     //If session exists, proceed to page
+   } else {
+      var err = new Error("Not logged in!");
+      console.log(req.session.user);
+      next(err);  //Error, trying to access unauthorized page!
+   }
+}
 
 //Returns the router as a useable variable
 module.exports = router;

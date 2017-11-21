@@ -18,10 +18,11 @@
   },
   "homepage": "https://github.com/hhaddock/WholesomeSweetsAPI#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "mysql": "^2.15.0",
-    "nodemon": "^1.12.1",
-    "bcrypt": "^1.0.3"
+    "nodemon": "^1.12.1"
   }
 }
