@@ -59,24 +59,6 @@ router.post('/login', function(req, res){
   });
 }); // end login
 
-router.post( '/inventory', function( req, res ) {
-    db.query( 'SELECT product.product, product.description, product_price.price, product_stock.stock, product_picture.path_to_picture FROM product WHERE product.product = product_price.fk_product AND product.product = product_stock.fk_product AND product.product = product_picture.fk_product', function( err, rows ) {
-        let row_count = rows.length;
-
-        if( row_count > 0 ) {
-            for( product in rows )
-            {
-                console.log( product );
-            }
-            res.send( "Loaded products" );
-        }
-        else {
-            res.send( "Couldnt load product info" );
-        }
-    });
-});
-
-
 function checkSignIn(req, res){
    if(req.session.user){
       next();     //If session exists, proceed to page
