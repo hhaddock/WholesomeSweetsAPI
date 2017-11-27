@@ -17,7 +17,7 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({secret: "testKey"}));
+app.use(session({secret: "testKey", resave:false, saveUninitialized:true}));
 
 //Tell the express server which router file to look at
 app.use('/user', require('./app/user.js'));
