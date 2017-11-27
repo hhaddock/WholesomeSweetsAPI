@@ -5,7 +5,8 @@ var db = require('./connection');
 router.post( '/products', function( req, res ) {
     let SQL = `
         SELECT product.product, product.description, product_price.price,
-               product_stock.stock, product_picture.path_to_picture
+               product_stock.stock, product_picture.path_to_picture,
+               0 as count
         FROM   product
         JOIN   product_price ON (product.product = product_price.fk_product)
         JOIN   product_stock ON (product.product = product_stock.fk_product)
