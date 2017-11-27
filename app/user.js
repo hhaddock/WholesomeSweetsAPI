@@ -47,7 +47,7 @@ router.post('/login', function(req, res){
         // sends true if the same false if not
         if(result){
          sess.user = email;
-         res.send(sess.user);
+         res.send(result);
         } else {
          res.send(err);
         }

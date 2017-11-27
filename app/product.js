@@ -25,5 +25,9 @@ router.post( '/products', function( req, res ) {
     });
 });
 
+function checkAuthenticated(){
+  
+}
+
 //Returns the router as a useable variable
 module.exports = router;
