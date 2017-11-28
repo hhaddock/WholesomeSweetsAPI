@@ -4,7 +4,7 @@ var db = require('./connection');
 
 router.post( '/products', function( req, res ) {
   req.session.reload(function(err) {
-    console.log(req.session.user);
+    console.log(req.session["user"]);
   })
 
   // if(checkAuthenticated(req)){
