@@ -46,7 +46,8 @@ router.post('/login', function(req, res){
       bcrypt.compare(pass, hash, function(err, result) {
         // sends true if the same false if not
         if(result){
-         sess.user = email;
+         req.session.key = email;
+         req.session.save();
          res.send(result);
         } else {
          res.send(err);
