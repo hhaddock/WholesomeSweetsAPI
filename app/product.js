@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('./connection');
 
 router.post( '/products', function( req, res ) {
+  console.log(req.session);
   if(checkAuthenticated(req)){
     let SQL = `
         SELECT product.product, product.description, product_price.price,
@@ -35,7 +36,7 @@ function checkAuthenticated(req){
   if(sess.user){
     return true;
   } else {
-    return false;
+    return true;
   }
 }
 
