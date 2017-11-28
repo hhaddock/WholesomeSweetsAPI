@@ -40,7 +40,7 @@ function getProducts(res){
           res.send( "Couldnt load product info" );
       }
   });
-}
+}//end getProducts
 
 //Returns the router as a useable variable
 module.exports = router;
