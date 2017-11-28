@@ -60,15 +60,5 @@ router.post('/login', function(req, res){
   });
 }); // end login
 
-function checkSignIn(req, res){
-   if(req.session.user){
-      next();     //If session exists, proceed to page
-   } else {
-      var err = new Error("Not logged in!");
-      console.log(req.session.user);
-      next(err);  //Error, trying to access unauthorized page!
-   }
-}
-
 //Returns the router as a useable variable
 module.exports = router;

@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('./connection');
 
 router.post( '/products', function( req, res ) {
+  if(checkAuthenticated(req)){
     let SQL = `
         SELECT product.product, product.description, product_price.price,
                product_stock.stock, product_picture.path_to_picture,
@@ -23,10 +24,19 @@ router.post( '/products', function( req, res ) {
             res.send( "Couldnt load product info" );
         }
     });
+  }// end if
+  else {
+    res.send("Error! Not logged in");
+  }
 });
 
-function checkAuthenticated(){
-  
+function checkAuthenticated(req){
+  sess = req.session;
+  if(sess.user){
+    return true;
+  } else {
+    return false;
+  }
 }
 
 //Returns the router as a useable variable
