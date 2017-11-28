@@ -8,7 +8,6 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var RedisStore = require('connect-redis')(session);
 
 //Creating an instance of of the Express server
 var app = express();
@@ -17,19 +16,7 @@ var app = express();
 //This is basic setup stuff for the server
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(session({
-  store: new RedisStore,
-  secret: "testKey",
-  resave:false,
-  saveUninitialized:true,
-  cookie: {
-    path: "/",
-    httpOnly: true,
-    secure: true
-  }
-})
-);
+
 
 //Tell the express server which router file to look at
 app.use('/user', require('./app/user.js'));

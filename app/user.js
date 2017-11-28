@@ -34,10 +34,10 @@ router.post('/signup', function(req,res){
 }); // end signup
 
 router.post('/login', function(req, res){
-  sess = req.session;
   var email = req.body.email;
   var pass = req.body.pass;
-  // grab hashed password from database
+
+  //grab hashed password from database
   db.query('SELECT password FROM user WHERE email = ?', [email], function(err, rows){
     let count = rows.length;
     if(count == 1){
@@ -46,9 +46,6 @@ router.post('/login', function(req, res){
       bcrypt.compare(pass, hash, function(err, result) {
         // sends true if the same false if not
         if(result){
-         req.session.save( function(err){
-           req.session.user = email;
-         });
          res.send(result);
         } else {
          res.send(err);
