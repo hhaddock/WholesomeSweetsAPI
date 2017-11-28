@@ -42,7 +42,7 @@ function insertOrderComplete(res, fk_order_group){
     INSERT INTO order_complete (fk_order_group) VALUES (?)
   `;
   db.query(SQL, [fk_order_group], function(err, rows){
-
+    res.send("Order completed");
   });
 }
 
