@@ -3,6 +3,23 @@ var router = express.Router();
 var db = require('./connection');
 
 router.post( '/products', function( req, res ) {
+  checkAuthenticated(req.body.email, getProducts(res));
+});
+
+function checkAuthenticated(email, getProducts){
+  var x = 0;
+  db.query('SELECT active FROM user WHERE email = ?', [email], function(err, rows){
+      let active = rows[0].active;
+      if(active == 1){
+        getProducts;
+      } else {
+        x = 0;
+      }
+      return x;
+  });
+}
+
+function getProducts(res){
   let SQL = `
       SELECT product.product, product.description, product_price.price,
              product_stock.stock, product_picture.path_to_picture,
@@ -23,14 +40,6 @@ router.post( '/products', function( req, res ) {
           res.send( "Couldnt load product info" );
       }
   });
-});
-
-function checkAuthenticated(req){
-  if(req.session.user){
-    return true;
-  } else {
-    return true;
-  }
 }
 
 //Returns the router as a useable variable

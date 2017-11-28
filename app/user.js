@@ -46,6 +46,7 @@ router.post('/login', function(req, res){
       bcrypt.compare(pass, hash, function(err, result) {
         // sends true if the same false if not
         if(result){
+         authenticate(email);
          res.send(result);
         } else {
          res.send(err);
@@ -58,6 +59,18 @@ router.post('/login', function(req, res){
     }
   });
 }); // end login
+
+router.post('/logout', function(req, res){
+  db.query('UPDATE user SET active = ? WHERE email = ?', [0 ,req.body.email], function(err, rows){
+    res.send('logged out');
+  });
+});// end logout
+
+function authenticate(email){
+  db.query('UPDATE user SET active = ? WHERE email = ?', [1, email] ,function(err, rows){
+    
+  });
+}//end authenticate
 
 //Returns the router as a useable variable
 module.exports = router;
