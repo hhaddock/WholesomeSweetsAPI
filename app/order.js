@@ -6,7 +6,11 @@ var temp_order_group = 0;
 var temp_order_num = 0;
 
 router.post( '/create_order', function( req, res ) {
-  checkAuthenticated(res ,req.body);
+  checkAuthenticated(res , req.body, insert_order(res, req.body));
+});
+
+router.post( '/get_orders', function( req, res ) {
+  checkAuthenticated(res , req.body, get_my_orders(res, req.body));
 });
 
 function insert_order(res, body){
@@ -34,11 +38,19 @@ function insert_order(res, body){
   });
 }
 
-function checkAuthenticated(res, body){
+function get_my_orders(res, body){
+  let SQL = 'SELECT order_group.order_group, order.order_num, order.fk_product, order.quantity, order.date_submitted FROM `order` JOIN order_group ON (order.order_num = order_group.fk_order_num) WHERE order.fk_email = ?';
+  db.query(SQL, [body.email], function(err, rows){
+    res.send(rows);
+
+  });
+}
+
+function checkAuthenticated(res, body, callBack){
   var x = 0;
   db.query('SELECT active FROM user WHERE email = ?', [body.email], function(err, rows){
     if(rows[0].active == 1){
-      insert_order(res, body);
+      callBack;
     } else {
       res.send("not logged in");
     }
