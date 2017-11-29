@@ -15,7 +15,7 @@ function insert_order(res, body){
     // insert into order_group with next highest order_group
     db.query('SELECT order_group FROM `order_group` ORDER BY order_group DESC LIMIT 1', function(err, rows){
       // get last order_group and bump one
-      if(body.order_group == null){//if order_group isn't set it is a new order
+      if(body.order_group == -1){//if order_group isn't set it is a new order
         let order_group = ++rows[0].order_group;
         db.query('INSERT INTO order_group (fk_order_num, order_group) VALUES(LAST_INSERT_ID(), ?)', [order_group], function(err, rows){
           // insert into order_complete
