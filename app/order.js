@@ -27,9 +27,7 @@ function insert_order(res, body){
         let order_group = body.order_group;
         db.query('INSERT INTO order_group (fk_order_num, order_group) VALUES(LAST_INSERT_ID(), ?)', [order_group], function(err, rows){
           // insert into order_complete
-          db.query('INSERT INTO order_complete (fk_order_group, status) VALUES (?, 0)', [order_group], function(err, rows){
-            res.send(String(order_group));
-          });
+          res.send(String(order_group));
         });
       }
     });
