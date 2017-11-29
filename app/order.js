@@ -11,7 +11,7 @@ router.post( '/create_order', function( req, res ) {
 
 function insert_order(res, body){
   // insert into order
-  db.query('INSERT INTO `order` (fk_product, fk_email, quantity) VALUES (?, ?, ?)', [body.product, body.email, body.quantity], function(err, rows){
+  db.query('INSERT INTO `order` (fk_product, fk_email, quantity, date_submitted) VALUES (?, ?, ?, NOW())', [body.product, body.email, body.quantity], function(err, rows){
     // insert into order_group with next highest order_group
     db.query('SELECT order_group FROM `order_group` ORDER BY order_group DESC LIMIT 1', function(err, rows){
       // get last order_group and bump one
