@@ -24,7 +24,7 @@ function insert_order(res, body){
           });
         });
       } else {
-        let order_group = body.order_group;
+        let order_group = parseInt(body.order_group, 10);
         db.query('INSERT INTO order_group (fk_order_num, order_group) VALUES(LAST_INSERT_ID(), ?)', [order_group], function(err, rows){
           // insert into order_complete
           res.send(String(order_group));
