@@ -39,7 +39,7 @@ function insert_order(res, body){
 }
 
 function get_my_orders(res, body){
-  let SQL = 'SELECT order_group.order_group, order.order_num, order.fk_product, order.quantity, UNIX_TIMESTAMP(order.date_submitted) AS date FROM `order` JOIN order_group ON (order.order_num = order_group.fk_order_num) WHERE order.fk_email = ?';
+  let SQL = 'SELECT order_group.order_group, order.order_num, order.fk_product, order.quantity, DATE_FORMAT(order.date_submitted, "%M %d %Y") as date FROM `order` JOIN order_group ON (order.order_num = order_group.fk_order_num) WHERE order.fk_email = ?';
   db.query(SQL, [body.email], function(err, rows){
     res.send(rows);
 
