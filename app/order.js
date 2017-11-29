@@ -14,9 +14,7 @@ function createOrder(res, body){
 }//end submit order
 
 function insertOrder(res, fk_product, fk_email, quantity, callBack){
-  let SQL = `
-    INSERT INTO order (fk_product, fk_email, quantity) VALUES (?, ?, ?)
-  `;
+  let SQL = 'INSERT INTO `order` (fk_product, fk_email, quantity) VALUES (?, ?, ?)';
   db.query(SQL, [fk_product, fk_email, quantity], function(err, rows){
     callBack;
   });
