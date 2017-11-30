@@ -3,19 +3,18 @@ var router = express.Router();
 var db = require('./connection');
 
 router.post( '/products', function( req, res ) {
-  checkAuthenticated(req.body.email, getProducts(res));
+  checkAuthenticated(req.body.email, res);
 });
 
-function checkAuthenticated(email, getProducts){
+function checkAuthenticated(email, res){
   var x = 0;
   db.query('SELECT active FROM user WHERE email = ?', [email], function(err, rows){
       let active = rows[0].active;
       if(active == 1){
-        getProducts;
+        getProducts(res);
       } else {
-        x = 0;
+        res.send("not logged in");
       }
-      return x;
   });
 }
 

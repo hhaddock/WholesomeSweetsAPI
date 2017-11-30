@@ -6,11 +6,13 @@ var temp_order_group = 0;
 var temp_order_num = 0;
 
 router.post( '/create_order', function( req, res ) {
-  checkAuthenticated(res , req.body, insert_order(res, req.body));
+  // must send body.email, body.product, body.quantity and body.order_group
+  checkAuthenticatedInsertOrder(res, req.body);
 });
 
 router.post( '/get_orders', function( req, res ) {
-  checkAuthenticated(res , req.body, get_my_orders(res, req.body));
+  // must send body.email
+  checkAuthenticatedGetOrders(res, req.body);
 });
 
 function insert_order(res, body){
@@ -46,11 +48,22 @@ function get_my_orders(res, body){
   });
 }
 
-function checkAuthenticated(res, body, callBack){
+function checkAuthenticatedGetOrders(res, body){
   var x = 0;
   db.query('SELECT active FROM user WHERE email = ?', [body.email], function(err, rows){
     if(rows[0].active == 1){
-      callBack;
+      get_my_orders(res, body);
+    } else {
+      res.send("not logged in");
+    }
+  });
+}
+
+function checkAuthenticatedInsertOrder(res, body){
+  var x = 0;
+  db.query('SELECT active FROM user WHERE email = ?', [body.email], function(err, rows){
+    if(rows[0].active == 1){
+      insert_order(res, body);
     } else {
       res.send("not logged in");
     }
